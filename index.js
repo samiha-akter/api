@@ -30,7 +30,16 @@ app.put("/:id",(req,resp)=>{
       resp.send(results)
     })
    
-  })
+  });
+
+// DELETE method
+app.delete("/:id", (req, resp) => {
+  const userId = req.params.id;
+  con.query("DELETE FROM users WHERE id = ?", userId, (error, results, fields) => {
+    if (error) throw error;
+    resp.send(results);
+  });
+});
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000");
